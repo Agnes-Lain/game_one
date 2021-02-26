@@ -19,51 +19,7 @@ def get_user(id):
         print ("no user or no user games")
 
 
-def get_user_games(user_id, games_count):
-    try:
-        pages = math.ceil(games_count/20)
-
-        for page in np.arange(1,pages+1):
-            print(f'pages number is: {page}')
-            url=f"https://api.rawg.io/api/users/{user_id}/games?pages={page}"
-            response = requests.get(url)
-            data = response.json()
-
-            # print(len(data['results']))
-            for result in data['results']:
-                user_rating = result["user_rating"]
-                # print(user_rating)
-
-                metacritic = result["metacritic"]
-                # print(metacritic)
-
-                rawg_rating = result["rating"]
-                # print(rawg_rating)
-
-                game_release = result["released"]
-                # print (game_release)
-
-                game_id = result['id']
-                # print(game_id)
-
-                game_slut = result["slug"]
-                # print(game_slut)
-
-                game_name = result['name']
-                # print(game_name)
-                play_time = result['playtime']
-
-                user_games.append({"user_id":user_id,
-                                   "game_id": game_id,
-                                   "game_slug":game_slut,
-                                   "game_name":game_name,
-                                   "user_rating":user_rating,
-                                   "metacritic":metacritic,
-                                   "rawg_rating":rawg_rating,
-                                   "released":game_release,
-                                   "play_time":play_time})
-    except:
-        print ("no user or no user games")
+  users[['id']].apply(lambda x: get_user_games(x[0], x[1]),axis=1)
 
 
 def get_games(game_id):
@@ -130,3 +86,9 @@ def get_games(game_id):
 
     except:
         print ("no games")
+
+counter = 0
+for game_id in games:
+    counter += 1
+    get_games(game_id)
+    print(counter)

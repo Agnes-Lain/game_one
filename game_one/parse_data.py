@@ -65,6 +65,8 @@ def get_user_games(user_id, games_count):
     except:
         print ("no user or no user games")
 
+  users[['id','games_count']].apply(lambda x: get_user_games(x[0], x[1]),axis=1)
+
 
 def get_games(game_id):
     try:

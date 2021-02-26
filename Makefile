@@ -59,3 +59,19 @@ pypi_test:
 
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
+
+
+## create a bucket for google cloud platform
+# project id
+PROJECT_ID=lewagon-305915  # Replace with your Project's ID
+
+# bucket name
+BUCKET_NAME=lewagon-305915
+
+REGION=europe-west1 
+
+set_project:
+    @gcloud config set project ${PROJECT_ID}
+
+create_bucket:
+    @gsutil mb -l ${REGION} -p ${PROJECT_ID} gs://${BUCKET_NAME}

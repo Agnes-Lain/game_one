@@ -9,14 +9,14 @@ from surprise.model_selection import cross_validate
 class CFModel():
 
     def __init__(self):
-        pass
+        self.df = None
 
     def load_data():
         '''
         Get user game data
         '''
-        user_game_df = pd.read_csv("../raw_data/rawg_user_games.csv")
-        return user_game_df
+        df = pd.read_csv("rawg_user_games.csv")
+        return df
 
     def get_ratings_and_meta(df):
         filter_df = df[df['user_rating']>0]

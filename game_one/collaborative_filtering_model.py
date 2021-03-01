@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import difflib
+import joblib
 
 from surprise import SVD
 from surprise import Dataset
@@ -107,3 +108,12 @@ class CFModel():
         self.metadata.reset_index
         pred_user_filtered_w_n = pred_user_filtered.merge(self.metadata, left_on='game_id', right_on='game_id', how='left')
         return pred_user_filtered_w_n
+
+    def save_model(self):
+        with open('model-cfm.joblib', 'wb') as model:
+            joblib.dump(self, model)
+
+    def load_model(name):
+        with open(name, 'rb') as model: 
+            model = joblib.load(model)
+            return model

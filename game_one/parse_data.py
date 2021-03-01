@@ -19,7 +19,7 @@ def get_user(id):
         print ("no user or no user games")
 
 
-  users[['id']].apply(lambda x: get_user_games(x[0], x[1]),axis=1)
+users[['id']].apply(lambda x: get_user_games(x[0], x[1]),axis=1)
 
 
 def get_games(game_id):

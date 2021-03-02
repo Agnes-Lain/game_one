@@ -3,12 +3,12 @@ import pandas as pd
 import difflib
 import pickle
 
-from surprise import NMF
+from surprise import SVDpp
 from surprise import Dataset
 from surprise import Reader
 from surprise.model_selection import cross_validate
 
-class NMFTrain():
+class SVDPPTrain():
 
     def __init__(self):
         self.data = None
@@ -47,19 +47,19 @@ class NMFTrain():
         '''
         Create a model and train it 
         '''
-        nmf = NMF(verbose=True, n_epochs=10)
+        svdpp = SVDpp(verbose=True, n_epochs=10)
         trainset = self.surprise_data.build_full_trainset()
-        nmf.fit(trainset)
-        self.model = nmf
+        svdpp.fit(trainset)
+        self.model = svdpp
         return self.model
 
     def validate_svd_model(self):
         '''
         SVD model 
         '''
-        nmf = NMF(verbose=True, n_epochs=10)
-        cross_validate(nmf, self.surprise_data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
+        svdpp = SVDpp(verbose=True, n_epochs=10)
+        cross_validate(svdpp, self.surprise_data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
 
     def save_model(self):
-        with open('model-nmf.pickle', 'wb') as model:
+        with open('model-svd-plus.pickle', 'wb') as model:
             pickle.dump(self, model)

@@ -8,7 +8,7 @@ from surprise import Dataset
 from surprise import Reader
 from surprise.model_selection import cross_validate
 
-class NMFPredict():
+class SVDPPPredict():
 
     def __init__(self, name):
         self.model = self.load_model(name)

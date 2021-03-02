@@ -15,7 +15,7 @@ class MyCustomPreprocessorKnn():
         self.get_X_matrix()
 
     def load_data(self):
-        self.user_game_df = pd.read_csv("../raw_data/rawg_user_games.csv")
+        self.user_game_df = pd.read_csv("raw_data/rawg_user_games.csv")
 
     def get_ratings(self):
         filter_df = self.user_game_df[self.user_game_df['user_rating'] > 0]

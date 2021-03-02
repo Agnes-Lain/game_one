@@ -61,7 +61,17 @@ pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
 
 
---------------------------------------------------
+#-----------------------------------
+#	    SETUP THE RUN OF FAST API
+#-----------------------------------
+run_api:
+	uvicorn api.fast:app --reload  # load web server with code autoreload
+
+
+
+#----------------------------------
+#SET OF GOOGLE CLOUD STORAGE
+#----------------------------------
 # path of the file to upload to gcp (the path of the file should be absolute or should match the directory where the make command is run)
 LOCAL_PATH="/home/rasha/code/Agnes-Lain/game_one/raw_data/steam-200k.csv"
 

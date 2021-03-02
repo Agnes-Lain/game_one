@@ -3,11 +3,11 @@ import string
 # from nltk.tokenize import word_tokenize
 import pandas as pd
 import numpy as np
+from game_one.parse_data import get_game
 
 
 COLUMNS = ['slug',
            'description',
-           'game_platforms',
            'game_genres',
            'game_tags']
 
@@ -17,7 +17,7 @@ class GetMetadata(object):
         self.df = None
 
     def get_games(self):
-        self.df = pd.read_csv('../raw_data/rawg_games.csv')
+        self.df = pd.read_csv('raw_data/rawg_games.csv')
 #         return self.df.head(1)
 
     def stringfy_columns(self):
@@ -43,13 +43,17 @@ class GetMetadata(object):
         text = text.replace('br', '')
         return text.lower()
 
-    def create_metadata(self):
-        self.get_games()
+    def create_metadata(self, game_id = None):
+        if game_id == None:
+            self.get_games()
+        else:
+            self.df = pd.DataFrame(get_game(game_id))
         self.stringfy_columns()
         self.merge_metadata()
 #         print(self.df['metadata'][0])
         self.df['metadata'] = self.df['metadata'].apply(lambda x: self.replace_punctuations(x))
         return self.df['metadata']
+
 
 
 if __name__ == '__main__':

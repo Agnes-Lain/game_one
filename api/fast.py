@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-
+from game_one.model_knn_predict import PredictKnn
 
 
 app = FastAPI()
@@ -41,4 +41,11 @@ def pred_games(game_id):
         reco_df = pd.DataFrame(dictDf, index = CBP.latent_df.index)
         final = reco_df.sort_values('content', ascending=False, inplace=False)[1:16]
         return final.reset_index().to_dict()
+
+  @app.post("/pred_games")
+      def pred_games_col(user_dict):
+      model_knn = PredictKnn()
+      user_id = model_knn.get_user_id(user_dict)
+      cf
+      return
 

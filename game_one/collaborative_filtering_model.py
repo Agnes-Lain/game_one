@@ -91,7 +91,7 @@ class CFModel():
         Predicts the user_rating (on a scale of 0-5) that a user would assign to a specific game. 
         """
 
-        game_id = self.get_game_id(self, game_name)
+        game_id = self.get_game_id(game_name)
         review_prediction = self.model.predict(uid=user_id, iid=game_id)
         return review_prediction.est
 
@@ -100,7 +100,7 @@ class CFModel():
         Generates a list of games recommendation for a user based on a rating threshold. Only
         games with a predicted rating at or above the threshold will be recommended
         """
-        pred_user = pd.DataFrame(self.all_prediction_for_a_user(self, user_id))\
+        pred_user = pd.DataFrame(self.all_prediction_for_a_user(user_id))\
                 .drop(columns=['uid','r_ui', 'details'])\
                 .sort_values('est',ascending=False)
         pred_user_filtered = pred_user[pred_user['est'] >= thresh]

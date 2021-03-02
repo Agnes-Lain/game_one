@@ -47,18 +47,18 @@ class CFMTrain():
         '''
         Create a model and train it 
         '''
-        svd = SVD(verbose=True, n_epochs=50)
+        svd = SVD(verbose=True, n_epochs=20)
         trainset = self.surprise_data.build_full_trainset()
         svd.fit(trainset)
         self.model = svd
         return self.model
 
-    def validate_svd_model(self):
+    def validate_svd_model(self, k_factors):
         '''
         SVD model 
         '''
-        svd = SVD(verbose=True, n_epochs=10)
-        cross_validate(svd, self.surprise_data, measures=['RMSE', 'MAE'], cv=10, verbose=True)
+        svd = SVD(verbose=False, n_epochs=20, n_factors=k_factors)
+        cross_validate(svd, self.surprise_data, measures=['MAE'], cv=10, verbose=True)
 
     def save_model(self):
         with open('model-cfm.pickle', 'wb') as model:

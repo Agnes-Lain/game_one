@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import difflib
-import joblib
+import pickle
 
 from surprise import SVD
 from surprise import Dataset
@@ -15,7 +15,7 @@ class CFMPredict():
 
     def load_model(self, name):
         with open(name, 'rb') as model: 
-            model = joblib.load(model)
+            model = pickle.load(model)
             return model
 
     def all_prediction_for_a_user(self, user_id):

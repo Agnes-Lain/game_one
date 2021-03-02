@@ -6,4 +6,4 @@ raw_data/
 **/__pycache__/
 .env
 *.pickle
-.joblib
+*.joblib

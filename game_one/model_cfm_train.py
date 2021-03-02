@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import difflib
-import joblib
+import pickle
 
 from surprise import SVD
 from surprise import Dataset
@@ -61,5 +61,5 @@ class CFMTrain():
         cross_validate(svd, self.surprise_data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
 
     def save_model(self):
-        with open('model-cfm.joblib', 'wb') as model:
-            joblib.dump(self, model)
+        with open('model-cfm.pickle', 'wb') as model:
+            pickle.dump(self, model)

@@ -55,7 +55,7 @@ def pred_games_col(user_dict: UserDict):
     print(user_dict)
     user_dict_2 = user_dict.games
     user_id = model_knn.get_user_id(user_dict_2)
-    model_cfm = CFMPredict('model-cfm.joblib')
+    model_cfm = CFMPredict('model-cfm.pickle')
     reco =  model_cfm.generate_recommendation(user_id, 3)
     return reco
 

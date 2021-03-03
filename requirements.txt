@@ -28,8 +28,8 @@ six>=1.14
 joblib
 memoized-property
 termcolor
-pickle
 fastapi
 uvicorn
 
 nltk
+pickle5

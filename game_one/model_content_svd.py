@@ -4,7 +4,7 @@ import numpy as np
 from game_one.get_meta_matrix import GetMetadata, COLUMNS
 from sklearn.decomposition import TruncatedSVD
 from sklearn.metrics.pairwise import cosine_similarity
-import pickle
+import pickle5 as pickle
 import pdb
 
 
@@ -48,8 +48,14 @@ class ContentBasePred(object):
         self.latent_df = pd.DataFrame(latent_df, index=self.games.game_id.tolist())
 
 
-
-
+if __name__ == '__main__':
+    # init an instance of the class ContentBasePred
+    cbp = ContentBasePred()
+    cbd.get_metadata()
+    cbd.load_tf
+    cbd.svd_train
+    with open('content_base_svd.pickle', 'wb') as f:
+        pickle.dump(cbd, f)
 
 
 

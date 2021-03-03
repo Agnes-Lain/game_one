@@ -1,4 +1,5 @@
 import pandas as pd
+import pickle5 as pickle
 
 
 class MyCustomPreprocessorKnn():
@@ -13,6 +14,7 @@ class MyCustomPreprocessorKnn():
         self.get_ratings()
         self.get_rating_matrix()
         self.get_X_matrix()
+        self.save_knn_preproc()
 
     def load_data(self):
         self.user_game_df = pd.read_csv("raw_data/rawg_user_games.csv")
@@ -40,3 +42,7 @@ class MyCustomPreprocessorKnn():
             self.X_matrix.loc[game_id, 'ratings'] = ratings
             X = self.X_matrix['ratings'].values
             return X
+
+    def save_knn_preproc(self):
+        with open('preproc.pickle', 'wb') as preproc:
+            pickle.dump(self, preproc)

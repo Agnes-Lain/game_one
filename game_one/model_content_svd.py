@@ -46,10 +46,3 @@ class ContentBasePred(object):
         self.model_svd = svd.fit(self.matrix_tf)
         latent_df = self.model_svd.transform(self.matrix_tf)
         self.latent_df = pd.DataFrame(latent_df, index=self.games.game_id.tolist())
-
-
-
-
-
-
-

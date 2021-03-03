@@ -6,9 +6,7 @@ import numpy as np
 from game_one.parse_data import get_game
 
 
-COLUMNS = ['slug',
-           'description',
-           'game_genres',
+COLUMNS = ['game_genres',
            'game_tags']
 
 class GetMetadata(object):

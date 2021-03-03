@@ -58,7 +58,7 @@ class BaselineTrain():
         SVD model 
         '''
         baseline = BaselineOnly(verbose=True)
-        cross_validate(baseline, self.surprise_data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
+        cross_validate(baseline, self.surprise_data, measures=['RMSE', 'MAE'], cv=10, verbose=True)
 
     def save_model(self):
         with open('model-baseline.pickle', 'wb') as model:

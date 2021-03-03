@@ -2,8 +2,8 @@
 .coverage
 .ipynb_checkpoints
 .DS_Store
-raw_data/
 **/__pycache__/
 .env
 *.pickle
 *.joblib
+raw_data

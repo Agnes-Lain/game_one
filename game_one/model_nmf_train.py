@@ -47,7 +47,7 @@ class NMFTrain():
         '''
         Create a model and train it 
         '''
-        nmf = NMF(verbose=True, n_epochs=10)
+        nmf = NMF(verbose=True, n_epochs=50)
         trainset = self.surprise_data.build_full_trainset()
         nmf.fit(trainset)
         self.model = nmf
@@ -58,7 +58,7 @@ class NMFTrain():
         SVD model 
         '''
         nmf = NMF(verbose=True, n_epochs=10)
-        cross_validate(nmf, self.surprise_data, measures=['RMSE', 'MAE'], cv=5, verbose=True)
+        cross_validate(nmf, self.surprise_data, measures=['RMSE', 'MAE'], cv=10, verbose=True)
 
     def save_model(self):
         with open('model-nmf.pickle', 'wb') as model:

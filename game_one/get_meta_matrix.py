@@ -14,7 +14,7 @@ COLUMNS = [ 'game_genres',
             'publishers']
 
 class GetMetadata(object):
-    def __init__(self,columns):
+    def __init__(self, columns):
         self.columns = columns
         self.df = None
 

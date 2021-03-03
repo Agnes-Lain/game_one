@@ -34,7 +34,7 @@ class ContentBasePred(object):
         '''This function will run the Tfid model to transfer the meta string
         into a matrix, and stock into class constance self.meta_tf
         '''
-        tf_idf_vectorizer = TfidfVectorizer(stop_words='english', min_df=0.05)
+        tf_idf_vectorizer = TfidfVectorizer(stop_words='english', min_df=0.005)
         self.model_tf = tf_idf_vectorizer.fit(self.metadata)
         matrix = tf_idf_vectorizer.transform(self.metadata)
         self.matrix_tf = pd.DataFrame(matrix.toarray(), index=self.games.game_id.tolist())
@@ -55,4 +55,3 @@ if __name__ == '__main__':
     cbd.svd_train
     with open('content_base_svd.pickle', 'wb') as f:
         pickle.dump(cbd, f)
-

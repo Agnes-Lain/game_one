@@ -6,11 +6,15 @@ import numpy as np
 from game_one.parse_data import get_game
 
 
-COLUMNS = ['game_genres',
-           'game_tags']
+COLUMNS = [ 'game_genres',
+            'game_tags',
+            'name',
+            'slug',
+            'developers',
+            'publishers']
 
 class GetMetadata(object):
-    def __init__(self,columns):
+    def __init__(self, columns):
         self.columns = columns
         self.df = None
 
@@ -32,7 +36,6 @@ class GetMetadata(object):
             self.df['metadata'] += (self.df[column] + ' ')
 #         print(self.df['metadata'][0])
 #         print(type(self.df['metadata'][0]))
-
 
     def replace_punctuations(self, text):
         punctuations = string.punctuation.replace("|", "")+'•'

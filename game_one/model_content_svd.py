@@ -47,7 +47,6 @@ class ContentBasePred(object):
         latent_df = self.model_svd.transform(self.matrix_tf)
         self.latent_df = pd.DataFrame(latent_df, index=self.games.game_id.tolist())
 
-
 if __name__ == '__main__':
     # init an instance of the class ContentBasePred
     cbp = ContentBasePred()
@@ -56,6 +55,4 @@ if __name__ == '__main__':
     cbd.svd_train
     with open('content_base_svd.pickle', 'wb') as f:
         pickle.dump(cbd, f)
-
-
 

@@ -52,8 +52,6 @@ class GetMetadata(object):
         self.df['metadata'] = self.df['metadata'].apply(lambda x: self.replace_punctuations(x))
         return self.df['metadata']
 
-
-
 if __name__ == '__main__':
     print ('Initiate the GetMetaMatrix class and store as instance')
     get_metadata = GetMetadata(COLUMNS)

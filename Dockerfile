@@ -9,7 +9,7 @@ COPY api /api
 COPY game_one /game_one
 COPY content_base_svd.pickle /content_base_svd.pickle
 COPY knn_model.pickle /knn_model.pickle
-COPY model-cfm.joblib /model-cfm.joblib
+COPY model-cfm.pickle /model-cfm.pickle
 COPY preproc.pickle /preproc.pickle
 
 

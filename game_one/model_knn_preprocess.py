@@ -1,5 +1,6 @@
 import pandas as pd
 import pickle5 as pickle
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 class MyCustomPreprocessorKnn():
@@ -35,13 +36,33 @@ class MyCustomPreprocessorKnn():
         self.X_matrix = self.X_matrix.set_index('game_id')
         return self.X_matrix
 
+    def load_content_base(self):
+        with open('content_base_svd.pickle', 'rb') as cbp:
+            cbp = pickle.load(cbp)
+            return cbp
+
     def get_X_vector(self, user_dict):
         for game in user_dict:
             game_id = game["game_id"]
             ratings = game["user_rating"]
+            if not(game_id in self.X_matrix.index):
+                cbp = self.load_content_base()
+                game_meta = cbp.get_metadata(game_id)
+                game_matrix = cbp.model_tf.transform(game_meta)
+                # print(game_matrix.shape)
+                game_pred = cbp.model_svd.transform(game_matrix)
+                v1 = cbp.latent_df.values
+                sim2 = cosine_similarity(game_pred, v1).reshape(-1)
+                dictDf = {'content': sim2}
+                reco_df = pd.DataFrame(dictDf, index = cbp.latent_df.index)
+                final = reco_df.sort_values('content', ascending=False, inplace=False)[1:16]
+                game_id = final.reset_index().to_dict()["index"][0]
             self.X_matrix.loc[game_id, 'ratings'] = ratings
             X = self.X_matrix['ratings'].values
             return X
+
+
+
 
     def save_knn_preproc(self):
         with open('preproc.pickle', 'wb') as preproc:

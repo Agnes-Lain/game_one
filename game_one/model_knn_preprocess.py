@@ -55,7 +55,11 @@ class MyCustomPreprocessorKnn():
                 dictDf = {'content': sim2}
                 reco_df = pd.DataFrame(dictDf, index = cbp.latent_df.index)
                 final = reco_df.sort_values('content', ascending=False, inplace=False)[1:16]
-                game_id = final.reset_index().to_dict()["index"][0]
+                game_ids = final.reset_index().to_dict()["index"].values()
+                for game_id in game_ids:
+                    if game_id in self.X_matrix.index:
+                        game_id = game_id
+                    break
             self.X_matrix.loc[game_id, 'ratings'] = ratings
             X = self.X_matrix['ratings'].values
             return X

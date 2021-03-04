@@ -24,5 +24,4 @@ class TrainKnn():
 
     def save_model(self, filename):
         with open(filename, 'wb') as handle:
-            pickle.dump(self.neigh, handle, protocol=pickle.HIGHEST_PROTOCOL)
-
+            pickle.dump(self.neigh, handle)

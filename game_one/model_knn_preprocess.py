@@ -49,7 +49,6 @@ class MyCustomPreprocessorKnn():
                 cbp = self.load_content_base()
                 game_meta = cbp.get_metadata(game_id)
                 game_matrix = cbp.model_tf.transform(game_meta)
-                # print(game_matrix.shape)
                 game_pred = cbp.model_svd.transform(game_matrix)
                 v1 = cbp.latent_df.values
                 sim2 = cosine_similarity(game_pred, v1).reshape(-1)
@@ -60,9 +59,6 @@ class MyCustomPreprocessorKnn():
             self.X_matrix.loc[game_id, 'ratings'] = ratings
             X = self.X_matrix['ratings'].values
             return X
-
-
-
 
     def save_knn_preproc(self):
         with open('preproc.pickle', 'wb') as preproc:

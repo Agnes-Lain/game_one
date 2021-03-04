@@ -48,10 +48,14 @@ class ContentBasePred(object):
         self.latent_df = pd.DataFrame(latent_df, index=self.games.game_id.tolist())
 
 if __name__ == '__main__':
-    # init an instance of the class ContentBasePred
+    print ('init an instance of the class ContentBasePred')
     cbp = ContentBasePred()
-    cbd.get_metadata()
-    cbd.load_tf
-    cbd.svd_train
+    print(cbp)
+    cbp.get_metadata()
+    print(cbp.metadata[0])
+    cbp.load_tf()
+    cbp.svd_train()
+    print(cbp.model_svd)
     with open('content_base_svd.pickle', 'wb') as f:
-        pickle.dump(cbd, f)
+        pickle.dump(cbp, f)
+    print('model saved')

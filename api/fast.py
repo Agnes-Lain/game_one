@@ -18,6 +18,7 @@ app = FastAPI()
 
 with open("content_base_svd.pickle", "rb") as f:
     CBP = pickle.load(f)
+
 model_knn = PredictKnn('knn_model.pickle')
 
 app.add_middleware(CORSMiddleware,
@@ -35,9 +36,8 @@ def pred_games(game_id):
         sim1 = cosine_similarity(CBP.latent_df, v1).reshape(-1)
         dictDf = {'content': sim1}
         reco_df = pd.DataFrame(dictDf, index = CBP.latent_df.index)
-        x = reco_df.sort_values('content', ascending=False, inplace=False)[1:22]
-        y = x.reset_index().to_dict()
-        return y
+        final = reco_df.sort_values('content', ascending=False, inplace=False)[1:16]
+        return final.reset_index().to_dict()
     else:
         game_meta = CBP.get_metadata(game_id)
         game_matrix = CBP.model_tf.transform(game_meta)
@@ -55,7 +55,7 @@ def pred_games_col(user_dict: UserDict):
     print(user_dict)
     user_dict_2 = user_dict.games
     user_id = model_knn.get_user_id(user_dict_2)
-    model_cfm = CFMPredict('model-cfm.joblib')
+    model_cfm = CFMPredict('model-cfm.pickle')
     reco =  model_cfm.generate_recommendation(user_id, 3)
     return reco
 

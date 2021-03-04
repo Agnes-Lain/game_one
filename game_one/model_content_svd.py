@@ -17,6 +17,10 @@ class ContentBasePred(object):
         self.matrix_tf = None
         self.model_svd = None
         self.latent_df = None
+        self.get_metadata()
+        self.load_tf()
+        self.svd_train()
+        self.save_content_model()
 
     def get_metadata(self, game_id=None):
         '''this function will get the metadata from the get_meta_matrix class,
@@ -46,6 +50,10 @@ class ContentBasePred(object):
         self.model_svd = svd.fit(self.matrix_tf)
         latent_df = self.model_svd.transform(self.matrix_tf)
         self.latent_df = pd.DataFrame(latent_df, index=self.games.game_id.tolist())
+
+    def save_content_model(self):
+        with open('content_base_svd.pickle', 'wb') as preproc:
+            pickle.dump(self, preproc)
 
 if __name__ == '__main__':
     print ('init an instance of the class ContentBasePred')

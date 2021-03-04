@@ -54,15 +54,19 @@ class MyCustomPreprocessorKnn():
                 sim2 = cosine_similarity(game_pred, v1).reshape(-1)
                 dictDf = {'content': sim2}
                 reco_df = pd.DataFrame(dictDf, index = cbp.latent_df.index)
-                final = reco_df.sort_values('content', ascending=False, inplace=False)[1:16]
+                final = reco_df.sort_values('content', ascending=False, inplace=False)[1:100]
                 game_ids = final.reset_index().to_dict()["index"].values()
-                for game_id in game_ids:
-                    if game_id in self.X_matrix.index:
-                        game_id = game_id
-                    break
+                print(game_ids)
+                for game in game_ids:
+                    games_tmp = []
+                    print(games_tmp)
+                    if game in self.X_matrix.index:
+                        games_tmp.append(game)
+                game_id = games_tmp[0]
+                print(game_id)
             self.X_matrix.loc[game_id, 'ratings'] = ratings
-            X = self.X_matrix['ratings'].values
-            return X
+        X = self.X_matrix['ratings'].values
+        return X
 
     def save_knn_preproc(self):
         with open('preproc.pickle', 'wb') as preproc:

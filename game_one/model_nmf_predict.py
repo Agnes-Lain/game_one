@@ -23,7 +23,7 @@ class NMFPredict():
         Gets all the rating prediction for user.
         '''
         predictions = []
-        games = list(self.model.ratings_df['game_id'].unique())
+        games = list(self.model.metadata['game_id'].unique())
         for game in games:
             prediction = self.model.model.predict(uid=user_id, iid=game)
             predictions.append(prediction)
@@ -49,9 +49,9 @@ class NMFPredict():
         """
         Predicts the user_rating (on a scale of 0-5) that a user would assign to a specific game. 
         """
-        game_id = self.get_game_id(self, game_name)
-        review_prediction = self.model.predict(uid=user_id, iid=game_id)
-        return review_prediction.est
+        game_id = self.get_game_id(game_name)
+        review_prediction = self.model.model.predict(uid=user_id, iid=game_id)
+        return review_prediction
 
     def generate_recommendation(self, user_id, thresh):
         """
@@ -73,3 +73,12 @@ class NMFPredict():
         filtered_pred = pred_user_filtered_w_n_o_n[['game_id', 'pred_r']].head(10)
         return filtered_pred.to_dict()
 
+    # def generate_all_prediction(self):
+    #     all_preds = pd.DataFrame(self.all_prediction_for_a_user(list(self.model.data['user_id'].unique())[0])).reset_index(drop=True)
+    #     for user in list(self.model.data['user_id'].unique())[1:]:
+    #         pred_user = pd.DataFrame(self.all_prediction_for_a_user(user))
+    #         # print(pred_user)
+    #         # print(all_preds)
+    #         all_preds = pd.concat([all_preds, pred_user], axis=0)
+    #         # print(all_preds)
+    #     return all_preds

@@ -73,3 +73,14 @@ class CFMPredict():
         filtered_pred = pred_user_filtered_w_n_o_n[['game_id', 'pred_r']].head(10)
         return filtered_pred.to_dict()
 
+    # def generate_all_prediction(self):
+    #     all_preds = pd.DataFrame(self.all_prediction_for_a_user(list(self.model.data['user_id'].unique())[0])).reset_index(drop=True)
+    #     for user in list(self.model.data['user_id'].unique())[1:]:
+    #         pred_user = pd.DataFrame(self.all_prediction_for_a_user(user))
+    #         # print(pred_user)
+    #         # print(all_preds)
+    #         all_preds = pd.concat([all_preds, pred_user], axis=0)
+    #         # print(all_preds)
+    #     return all_preds
+
+

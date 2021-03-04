@@ -58,7 +58,7 @@ class NMFTrain():
         SVD model 
         '''
         nmf = NMF(verbose=True, n_epochs=10)
-        cross_validate(nmf, self.surprise_data, measures=['RMSE', 'MAE'], cv=10, verbose=True)
+        cross_validate(nmf, self.surprise_data, measures=['fcp'], cv=10, verbose=True)
 
     def save_model(self):
         with open('model-nmf.pickle', 'wb') as model:

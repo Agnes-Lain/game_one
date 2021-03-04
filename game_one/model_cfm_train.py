@@ -58,7 +58,7 @@ class CFMTrain():
         SVD model 
         '''
         svd = SVD(verbose=False, n_epochs=20, n_factors=k_factors)
-        cross_validate(svd, self.surprise_data, measures=['MAE'], cv=10, verbose=True)
+        cross_validate(svd, self.surprise_data, measures=['fcp'], cv=10, verbose=True)
 
     def save_model(self):
         with open('model-cfm.pickle', 'wb') as model:

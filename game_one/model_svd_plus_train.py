@@ -47,7 +47,7 @@ class SVDPPTrain():
         '''
         Create a model and train it 
         '''
-        svdpp = SVDpp(verbose=True, n_epochs=50)
+        svdpp = SVDpp(verbose=True, n_epochs=10)
         trainset = self.surprise_data.build_full_trainset()
         svdpp.fit(trainset)
         self.model = svdpp
@@ -58,7 +58,7 @@ class SVDPPTrain():
         SVD model 
         '''
         svdpp = SVDpp(verbose=True, n_epochs=10)
-        cross_validate(svdpp, self.surprise_data, measures=['RMSE', 'MAE'], cv=10, verbose=True)
+        cross_validate(svdpp, self.surprise_data, measures=['fcp'], cv=5, verbose=True)
 
     def save_model(self):
         with open('model-svd-plus.pickle', 'wb') as model:

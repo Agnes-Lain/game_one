@@ -33,7 +33,7 @@ def get_game(game_id):
         rawg_ratings = []
         for rating in data["ratings"]:
             rawg_ratings.append(f"{rating['id']}|{rating['title']}|{rating['count']}|{rating['percent']}")
-        print(', '.join(rawg_ratings))
+        # print(', '.join(rawg_ratings))
 
 
     #         this is to get the list of platforms availble for each games:
@@ -41,29 +41,29 @@ def get_game(game_id):
         for platform in data["platforms"]:
             game_platforms.append(f"{platform['platform']['id']}|{platform['platform']['name']}")
 
-        print(', '.join(game_platforms))
+        # print(', '.join(game_platforms))
 
         game_genres = []
         for genre in data["genres"]:
             game_genres.append(genre['name'])
-        print(', '.join(game_genres))
+        # print(', '.join(game_genres))
 
         game_tags = []
         for tag in data['tags']:
             game_tags.append(tag['name'])
-        print(', '.join(game_genres))
+        # print(', '.join(game_genres))
 
         developers = []
         if data["developers"]:
             for developer in data["developers"]:
                 developers.append(f"{developer['id']}|{developer['name']}")
-            print(', '.join(developers))
+            # print(', '.join(developers))
 
         publishers = []
         if data["publishers"]:
             for publisher in data["publishers"]:
                 publishers.append(f"{publisher['id']}|{publisher['name']}")
-            print(', '.join(publishers))
+            # print(', '.join(publishers))
 
         rawg_games.append({"game_id":game_id,
                            "slug": data["slug"],

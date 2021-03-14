@@ -16,7 +16,7 @@ class TrainKnn():
             return preproc
 
     def train_model(self):
-        df = self.preprocessor.get_rating_matrix()
+        df = self.preprocessor.rating_matrix
         neigh = NearestNeighbors(n_neighbors=1)
         neigh.fit(df)
         self.neigh = neigh

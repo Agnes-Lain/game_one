@@ -17,7 +17,7 @@ class CFMTrain():
         '''
         Get user game data
         '''
-        self.data = pd.read_csv("raw_data/rawg_user_games.csv")
+        self.data = pd.read_csv("raw_data/rawg_user_games_old.csv")
         self.data['purchase'] = 1
         return self.data
 
@@ -58,7 +58,7 @@ class CFMTrain():
         SVD model 
         '''
         svd = SVD(verbose=False, n_epochs=30, n_factors=k_factors)
-        cross_validate(svd, self.surprise_data, measures=['fcp'], cv=10, verbose=True)
+        cross_validate(svd, self.surprise_data, measures=['fcp','mae','rmse','mse'], cv=10, verbose=True)
 
     def save_model(self):
         with open('model-cfm.pickle', 'wb') as model:

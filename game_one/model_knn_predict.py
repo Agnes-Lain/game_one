@@ -34,30 +34,16 @@ class PredictKnn():
         # print(y)
         user_id_index = y[0][0]
         user_id = user_index[user_id_index]
+        print(f'***********The match user id is - {user_id} -***********')
         return user_id
 
 if __name__ == "__main__":
     knn = PredictKnn('knn_model.pickle')
     print(
-        knn.get_user_id(
-             [{"game_id": 10646, "user_rating": 4},
-             {"game_id": 19279, "user_rating": 5},
-             {"game_id": 18099, "user_rating": 3},
-             {"game_id": 19495, "user_rating": 4},
-             {"game_id": 264828, "user_rating": 3},
-             {"game_id": 11593, "user_rating": 5},
-             {"game_id": 21371, "user_rating": 4},
-             {"game_id": 19442, "user_rating": 4},
-             {"game_id": 51487, "user_rating": 4},
-             {"game_id": 2536, "user_rating": 4},
-             {"game_id": 284, "user_rating": 5},
-             {"game_id": 3955, "user_rating": 4},
-             {"game_id": 59637, "user_rating": 3},
-             {"game_id": 19458, "user_rating": 5},
-             {"game_id": 2830, "user_rating": 4},
-             {"game_id": 1682, "user_rating": 3},
-             {"game_id": 4223, "user_rating": 3},
-             {"game_id": 39, "user_rating": 3},
-             {"game_id": 2454, "user_rating": 5}]
+        knn.get_user_id([
+                          {"game_id":546464, "user_rating": 4},
+                          {"game_id":30933, "user_rating": 4},
+                          {"game_id":35971, "user_rating": 4}
+                        ]
         )
     )

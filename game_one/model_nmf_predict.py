@@ -14,7 +14,7 @@ class NMFPredict():
         self.model = self.load_model(name)
 
     def load_model(self, name):
-        with open(name, 'rb') as model: 
+        with open(name, 'rb') as model:
             model = pickle.load(model)
             return model
 
@@ -29,7 +29,7 @@ class NMFPredict():
             predictions.append(prediction)
         return predictions
 
-    def get_game_id(self, game_name):    
+    def get_game_id(self, game_name):
         """
         Gets the game ID for a game_name based on the closest match in the metadata dataframe.
         """
@@ -47,7 +47,7 @@ class NMFPredict():
 
     def predict_rating(self, user_id, game_name):
         """
-        Predicts the user_rating (on a scale of 0-5) that a user would assign to a specific game. 
+        Predicts the user_rating (on a scale of 0-5) that a user would assign to a specific game.
         """
         game_id = self.get_game_id(game_name)
         review_prediction = self.model.model.predict(uid=user_id, iid=game_id)
@@ -66,11 +66,11 @@ class NMFPredict():
         pred_user_filtered.rename(columns = {'iid':'game_id', 'est':'pred_r'}, inplace = True)
         self.model.metadata.reset_index
         pred_user_filtered_w_n = pred_user_filtered.merge(self.model.metadata, left_on='game_id', right_on='game_id', how='left')
-        data_filter_on_user = self.model.data[self.model.data['user_id'] == user_id]   
+        data_filter_on_user = self.model.data[self.model.data['user_id'] == user_id]
         pred_user_filtered_w_n_o_n = pred_user_filtered_w_n.merge(data_filter_on_user, left_on='game_id', right_on='game_id', how='left')
         pred_user_filtered_w_n_o_n = pred_user_filtered_w_n_o_n.drop(columns=['user_id'])
         pred_user_filtered_w_n_o_n = pred_user_filtered_w_n_o_n[pred_user_filtered_w_n_o_n['purchase'] != 1]
-        filtered_pred = pred_user_filtered_w_n_o_n[['game_id', 'pred_r']].head(10)
+        filtered_pred = pred_user_filtered_w_n_o_n[['game_id', 'pred_r']].head(9)
         return filtered_pred.to_dict()
 
     # def generate_all_prediction(self):

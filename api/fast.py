@@ -52,7 +52,7 @@ def pred_games(game_id):
 
 @app.post("/user_pred_games")
 def pred_games_col(user_dict: UserDict):
-    print(user_dict)
+    # print(user_dict)
     user_dict_2 = user_dict.games
     user_id = model_knn.get_user_id(user_dict_2)
     model_cfm = CFMPredict('model-cfm.pickle')

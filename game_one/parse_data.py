@@ -2,6 +2,11 @@ import numpy as np
 import pandas as pd
 import requests
 import math
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+API_KEY = os.getenv('RAWG_API_KEY')
 
 
 def get_user(id):
@@ -24,12 +29,12 @@ def get_user(id):
 def get_game(game_id):
     rawg_games = []
     try:
-#         api_key="58eeb730ca1a47e8aa9d130c3127d412"
-        url=f"https://api.rawg.io/api/games/{game_id}"
+        #         api_key="58eeb730ca1a47e8aa9d130c3127d412"
+        url=f"https://api.rawg.io/api/games/{game_id}?key={API_KEY}"
         response = requests.get(url)
         data = response.json()
 
-    #         this is to transfer the list of dict into a string to stock in one cell:
+        #         this is to transfer the list of dict into a string to stock in one cell:
         rawg_ratings = []
         for rating in data["ratings"]:
             rawg_ratings.append(f"{rating['id']}|{rating['title']}|{rating['count']}|{rating['percent']}")

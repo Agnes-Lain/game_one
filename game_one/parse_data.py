@@ -11,7 +11,6 @@ API_KEY = os.getenv('RAWG_API_KEY')
 
 def get_user(id):
     try:
-        # api_key="58eeb730ca1a47e8aa9d130c3127d412"
         url=f"https://api.rawg.io/api/users/{id}"
         response = requests.get(url)
         data = response.json()
@@ -29,7 +28,6 @@ def get_user(id):
 def get_game(game_id):
     rawg_games = []
     try:
-        #         api_key="58eeb730ca1a47e8aa9d130c3127d412"
         url=f"https://api.rawg.io/api/games/{game_id}?key={API_KEY}"
         response = requests.get(url)
         data = response.json()
@@ -99,3 +97,6 @@ def get_game(game_id):
 #     counter += 1
 #     get_games(game_id)
 #     print(counter)
+
+if __name__ == '__main__':
+    print(API_KEY)

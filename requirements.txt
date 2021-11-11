@@ -33,3 +33,4 @@ uvicorn
 
 nltk
 pickle5
+python-dotenv

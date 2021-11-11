@@ -13,4 +13,5 @@ COPY model-cfm.pickle /model-cfm.pickle
 COPY preproc.pickle /preproc.pickle
 
 
-CMD uvicorn api.fast:app --host 0.0.0.0 --port 8080
+# CMD uvicorn api.fast:app --host 0.0.0.0 --port 8080
+CMD uvicorn api.fast:app --host 0.0.0.0 --port $PORT

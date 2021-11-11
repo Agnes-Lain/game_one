@@ -36,18 +36,18 @@ def pred_games(game_id):
         sim1 = cosine_similarity(CBP.latent_df, v1).reshape(-1)
         dictDf = {'content': sim1}
         reco_df = pd.DataFrame(dictDf, index = CBP.latent_df.index)
-        final = reco_df.sort_values('content', ascending=False, inplace=False)[1:16]
+        final = reco_df.sort_values('content', ascending=False, inplace=False)[1:10]
         return final.reset_index().to_dict()
     else:
         game_meta = CBP.get_metadata(game_id)
         game_matrix = CBP.model_tf.transform(game_meta)
-        print(game_matrix.shape)
+        # print(game_matrix.shape)
         game_pred = CBP.model_svd.transform(game_matrix)
         v1 = CBP.latent_df.values
         sim2 = cosine_similarity(game_pred, v1).reshape(-1)
         dictDf = {'content': sim2}
         reco_df = pd.DataFrame(dictDf, index = CBP.latent_df.index)
-        final = reco_df.sort_values('content', ascending=False, inplace=False)[1:16]
+        final = reco_df.sort_values('content', ascending=False, inplace=False)[1:10]
         return final.reset_index().to_dict()
 
 @app.post("/user_pred_games")

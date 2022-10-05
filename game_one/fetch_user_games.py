@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 import requests
+import os
+
+API_KEY = os.getenv('RAWG_API_KEY')
 
 class FetchUserGames(object):
     """
@@ -11,7 +14,7 @@ class FetchUserGames(object):
     def __init__(self, user_id):
         self.user_id = user_id
         self.results = None
-        self.url = f"https://api.rawg.io/api/users/{user_id}/games?"
+        self.url = f"https://api.rawg.io/api/users/{user_id}/games?key={API_KEY}"
 
     def get_user_game(self, result):
         """ create a dictionary for each parsed games from API rawg"""
@@ -65,7 +68,7 @@ class FetchUserGames(object):
         user_games = []
         for result in self.results:
             game = self.get_user_game(result)
-    #         print(game)
+            #         print(game)
             user_games.append(game)
         return user_games
 

@@ -99,4 +99,4 @@ def get_game(game_id):
 #     print(counter)
 
 if __name__ == '__main__':
-    print(API_KEY)
+    # print(API_KEY)
